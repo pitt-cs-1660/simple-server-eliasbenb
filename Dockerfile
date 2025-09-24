@@ -12,6 +12,7 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
 FROM python:3.12-slim
 
 ENV PYTHONPATH=/opt/venv/lib/python3.12/site-packages \
+    PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
