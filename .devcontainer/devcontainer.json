@@ -1,0 +1,32 @@
+{
+    "name": "pitt-cs-1660-simple-server",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "toolsToInstall": "virtualenv",
+            "optimize": true,
+            "version": "3.12"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/va-h/devcontainers-features/uv:1": {
+            "shellautocompletion": true
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "eamodio.gitlens",
+                "ms-python.python",
+                "redhat.vscode-yaml",
+                "tamasfe.even-better-toml",
+                "yy0931.vscode-sqlite3-editor",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    },
+    "postCreateCommand": "uv sync",
+    "containerEnv": {
+        "UV_LINK_MODE": "copy"
+    }
+}
