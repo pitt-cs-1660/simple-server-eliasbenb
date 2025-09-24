@@ -1,0 +1,5 @@
+services:
+  cc_simple_server:
+    build: .
+    ports:
+      - "8000:8000"
