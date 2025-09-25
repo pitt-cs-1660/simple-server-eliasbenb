@@ -13,16 +13,15 @@ FROM python:3.12-slim
 
 ENV PYTHONPATH=/opt/venv/lib/python3.12/site-packages \
     PATH="/opt/venv/bin:$PATH" \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
 COPY . /app
-
 COPY --from=builder /opt/venv /opt/venv
-
-# VOLUME ["/app/tasks.db"] # Would need to make the DB path configurable or seperate from the root of the app
 
 EXPOSE 8000
 
-CMD ["python", "-m", "uvicorn", "cc_simple_server.server:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["/opt/venv/bin/python", "-m", "uvicorn", "cc_simple_server.server:app"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]
