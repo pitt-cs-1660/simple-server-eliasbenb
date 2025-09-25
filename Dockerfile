@@ -16,10 +16,16 @@ ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
+RUN useradd -u 1000 -m -s /bin/bash -U app && \
+    mkdir -p /app /opt/venv && \
+    chown -R app:app /app /opt/venv
+
+COPY --from=builder --chown=app:app /opt/venv /opt/venv
+
+USER app
 WORKDIR /app
 
-COPY . /app
-COPY --from=builder /opt/venv /opt/venv
+COPY --chown=app:app . /app
 
 EXPOSE 8000
 
